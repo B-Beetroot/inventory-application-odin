@@ -1,0 +1,59 @@
+<div class="page-header">
+  <div>
+    <h1>Games</h1>
+  </div>
+
+  <a href="/games/create" class="primary-link">Add Game</a>
+</div>
+
+<% if (games.length === 0) { %>
+
+  <p>No games have been added yet.</p>
+
+<% } else { %>
+
+  <div class="game-cards">
+    <% games.forEach(game => { %>
+
+      <div class="game-card">
+
+        <h2>
+          <a href="/games/<%= game.id %>">
+            <%= game.title %>
+          </a>
+        </h2>
+
+        <p>
+          <strong>Genre:</strong>
+          <%= game.genre || "N/A" %>
+        </p>
+
+        <p>
+          <strong>Developer:</strong>
+          <%= game.developer || "N/A" %>
+        </p>
+
+        <p>
+          <strong>Release Date:</strong>
+           <%= game.release_date
+    ? new Date(game.release_date).toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+      })
+    : "N/A" %>
+        </p>
+
+        <p>
+          <strong>Price:</strong>
+          <%= game.price !== null
+            ? "$" + game.price
+            : "N/A" %>
+        </p>
+
+      </div>
+
+    <% }) %>
+  </div>
+
+<% } %>

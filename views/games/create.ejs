@@ -1,0 +1,158 @@
+<h1>Add Game</h1>
+
+<form action="/games/create" method="POST">
+
+  <label for="title">Title</label>
+  <input
+    type="text"
+    id="title"
+    name="title"
+    required
+  />
+
+  <label for="description">Description</label>
+  <textarea
+    id="description"
+    name="description"
+  ></textarea>
+
+  <label for="release_date">Release Date</label>
+  <input
+    type="date"
+    id="release_date"
+    name="release_date"
+  />
+
+  <label for="price">Price</label>
+  <input
+    type="number"
+    id="price"
+    name="price"
+    step="0.01"
+    min="0"
+  />
+
+  <label for="genre-select">Genres</label>
+
+  <div class="add-selection">
+    <select id="genre-select">
+      <option value="">Select a genre</option>
+
+      <% genres.forEach(genre => { %>
+        <option value="<%= genre.id %>">
+          <%= genre.name %>
+        </option>
+      <% }) %>
+    </select>
+
+    <button type="button" id="add-genre">
+      Add Genre
+    </button>
+  </div>
+
+  <div id="selected-genres" class="selected-items"></div>
+
+
+  <label for="developer-select">Developers</label>
+
+  <div class="add-selection">
+    <select id="developer-select">
+      <option value="">Select a developer</option>
+
+      <% developers.forEach(developer => { %>
+        <option value="<%= developer.id %>">
+          <%= developer.name %>
+        </option>
+      <% }) %>
+    </select>
+
+    <button type="button" id="add-developer">
+      Add Developer
+    </button>
+  </div>
+
+  <div id="selected-developers" class="selected-items"></div>
+
+
+  <button type="submit">
+    Create Game
+  </button>
+
+</form>
+
+
+<script>
+  const genreSelect = document.getElementById("genre-select");
+  const addGenreButton = document.getElementById("add-genre");
+  const selectedGenres = document.getElementById("selected-genres");
+
+  const developerSelect = document.getElementById("developer-select");
+  const addDeveloperButton = document.getElementById("add-developer");
+  const selectedDevelopers = document.getElementById("selected-developers");
+
+
+  function addSelection(select, container, inputName) {
+    const id = select.value;
+
+    if (!id) {
+      return;
+    }
+
+    const option = select.options[select.selectedIndex];
+    const name = option.textContent.trim();
+
+    const item = document.createElement("div");
+    item.classList.add("selected-item");
+
+    const nameElement = document.createElement("span");
+    nameElement.textContent = name;
+
+    const hiddenInput = document.createElement("input");
+    hiddenInput.type = "hidden";
+    hiddenInput.name = inputName;
+    hiddenInput.value = id;
+
+    const removeButton = document.createElement("button");
+    removeButton.type = "button";
+    removeButton.classList.add("remove-item");
+    removeButton.textContent = "Remove";
+
+    removeButton.addEventListener("click", () => {
+      option.hidden = false;
+      option.disabled = false;
+
+      item.remove();
+
+      select.value = "";
+    });
+
+    item.appendChild(nameElement);
+    item.appendChild(hiddenInput);
+    item.appendChild(removeButton);
+
+    container.appendChild(item);
+
+    option.hidden = true;
+    option.disabled = true;
+
+    select.value = "";
+  }
+
+
+  addGenreButton.addEventListener("click", () => {
+    addSelection(
+      genreSelect,
+      selectedGenres,
+      "genres"
+    );
+  });
+
+
+  addDeveloperButton.addEventListener("click", () => {
+    addSelection(
+      developerSelect,
+      selectedDevelopers,
+      "developers"
+    );
+  });
+</script>

@@ -1,0 +1,38 @@
+<h1><%= genre.name %></h1>
+
+<p>
+  <%= genre.description || "No description" %>
+</p>
+
+<div class="detail-actions">
+
+  <a
+    href="/genres/<%= genre.id %>/update"
+    class="edit-link"
+  >
+    Edit Genre
+  </a>
+
+  <form
+    action="/genres/<%= genre.id %>/delete"
+    method="POST"
+    class="delete-form"
+  >
+    <button type="submit">
+      Delete Genre
+    </button>
+  </form>
+
+</div>
+
+<h3>Games</h3>
+
+<ul>
+  <% games.forEach(game => { %>
+    <li>
+      <a href="/games/<%= game.id %>">
+        <%= game.title %>
+      </a>
+    </li>
+  <% }) %>
+</ul>

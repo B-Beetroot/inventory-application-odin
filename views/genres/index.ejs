@@ -1,0 +1,19 @@
+<h1>Genres</h1>
+
+<a href="/genres/create" class="primary-link">Add Genre</a>
+
+<ul>
+  <% genres.forEach(genre => { %>
+    <li>
+      <h2>
+        <a href="/genres/<%= genre.id %>">
+          <%= genre.name %>
+        </a>
+      </h2>
+
+      <p>
+        <%= genre.description || "No description" %>
+      </p>
+    </li>
+  <% }) %>
+</ul>

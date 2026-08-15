@@ -1,0 +1,11 @@
+<h1>Edit Genre</h1>
+
+<form action="/genres/<%= genre.id %>/update" method="POST">
+  <label>Name</label>
+  <input type="text" name="name" value="<%= genre.name %>" />
+
+  <label>Description</label>
+  <textarea name="description"><%= genre.description %></textarea>
+
+  <button type="submit">Update</button>
+</form>

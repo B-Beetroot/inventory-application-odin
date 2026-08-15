@@ -1,0 +1,20 @@
+<h1>Developers</h1>
+
+<a href="/developers/create" class="primary-link">Add Developer</a>
+
+<ul>
+  <% developers.forEach(developer => { %>
+    <li>
+      <h2>
+        <a href="/developers/<%= developer.id %>">
+          <%= developer.name %>
+        </a>
+      </h2>
+
+      <p>
+        <strong>Country:</strong>
+        <%= developer.country || "N/A" %>
+      </p>
+    </li>
+  <% }) %>
+</ul>

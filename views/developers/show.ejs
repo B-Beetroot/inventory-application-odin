@@ -1,0 +1,47 @@
+<h1><%= developer.name %></h1>
+
+<p>
+  <strong>Country:</strong>
+  <%= developer.country || "N/A" %>
+</p>
+
+<div class="detail-actions">
+
+  <a
+    href="/developers/<%= developer.id %>/update"
+    class="edit-link"
+  >
+    Edit Developer
+  </a>
+
+  <form
+    action="/developers/<%= developer.id %>/delete"
+    method="POST"
+    class="delete-form"
+  >
+    <button type="submit">
+      Delete Developer
+    </button>
+  </form>
+
+</div>
+
+<h3>Games</h3>
+
+<% if (games.length === 0) { %>
+
+  <p class="empty-message">No games assigned.</p>
+
+<% } else { %>
+
+  <ul class="related-list">
+    <% games.forEach(game => { %>
+      <li>
+        <a href="/games/<%= game.id %>">
+          <%= game.title %>
+        </a>
+      </li>
+    <% }) %>
+  </ul>
+
+<% } %>

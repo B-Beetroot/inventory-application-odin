@@ -1,0 +1,11 @@
+<h1>Edit Developer</h1>
+
+<form action="/developers/<%= developer.id %>/update" method="POST">
+  <label>Name</label>
+  <input type="text" name="name" value="<%= developer.name %>" />
+
+  <label>Country</label>
+  <input type="text" name="country" value="<%= developer.country %>" />
+
+  <button type="submit">Update</button>
+</form>

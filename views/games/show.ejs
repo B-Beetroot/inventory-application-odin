@@ -1,0 +1,101 @@
+<div class="game-details">
+
+  <h1><%= game.title %></h1>
+
+  <div class="game-info">
+
+    <p>
+      <strong>Description:</strong>
+      <%= game.description || "No description" %>
+    </p>
+
+    <p>
+      <strong>Release Date:</strong>
+ <%= game.release_date
+    ? new Date(game.release_date).toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+      })
+    : "N/A" %>
+    </p>
+
+    <p>
+      <strong>Price:</strong>
+      <%= game.price !== null
+        ? "$" + game.price
+        : "N/A" %>
+    </p>
+
+  </div>
+
+  <div class="game-related">
+
+    <div class="related-section">
+      <h3>Genres</h3>
+
+      <% if (genres.length === 0) { %>
+
+        <p class="empty-message">No genres assigned.</p>
+
+      <% } else { %>
+
+        <ul class="related-list">
+          <% genres.forEach(genre => { %>
+            <li>
+              <a href="/genres/<%= genre.id %>">
+                <%= genre.name %>
+              </a>
+            </li>
+          <% }) %>
+        </ul>
+
+      <% } %>
+    </div>
+
+    <div class="related-section">
+      <h3>Developer</h3>
+
+      <% if (developers.length === 0) { %>
+
+        <p class="empty-message">No developer assigned.</p>
+
+      <% } else { %>
+
+        <ul class="related-list">
+          <% developers.forEach(developer => { %>
+            <li>
+              <a href="/developers/<%= developer.id %>">
+                <%= developer.name %>
+              </a>
+            </li>
+          <% }) %>
+        </ul>
+
+      <% } %>
+    </div>
+
+  </div>
+
+  <div class="detail-actions">
+
+    <a
+      href="/games/<%= game.id %>/update"
+      class="edit-link"
+    >
+      Edit Game
+    </a>
+
+    <form
+      action="/games/<%= game.id %>/delete"
+      method="POST"
+      class="delete-form"
+    >
+      <button type="submit">
+        Delete Game
+      </button>
+    </form>
+
+  </div>
+
+</div>
